@@ -27,10 +27,7 @@
       gap: 12px;
       flex-shrink: 0;
     }
-    header .logo {
-      width: 28px;
-      height: 28px;
-    }
+    header .logo { width: 28px; height: 28px; }
     header h1 { font-size: 17px; font-weight: 600; letter-spacing: 0.01em; }
     header .model-badge {
       margin-left: auto;
@@ -43,23 +40,20 @@
     }
 
     /* ── Layout ── */
-    .app {
-      display: flex;
-      flex: 1;
-      overflow: hidden;
-    }
+    .app { display: flex; flex: 1; overflow: hidden; }
 
     /* ── Sidebar ── */
     .sidebar {
-      width: 240px;
+      width: 248px;
       background: #1a2a3a;
       color: #cdd9e5;
       display: flex;
       flex-direction: column;
       flex-shrink: 0;
-      padding: 16px 12px;
-      gap: 8px;
+      overflow: hidden;
     }
+    .sidebar-top { padding: 16px 12px 10px; display: flex; flex-direction: column; gap: 8px; }
+
     .sidebar .section-title {
       font-size: 11px;
       text-transform: uppercase;
@@ -68,7 +62,7 @@
       padding: 0 4px 6px;
       border-bottom: 1px solid #243347;
     }
-    .sidebar .new-chat-btn {
+    .new-chat-btn {
       width: 100%;
       background: #3b82d4;
       color: #fff;
@@ -77,27 +71,118 @@
       padding: 9px 14px;
       font-size: 13px;
       cursor: pointer;
-      margin-top: 4px;
       text-align: left;
     }
-    .sidebar .new-chat-btn:hover { background: #2f6ec4; }
-    .preset-list { display: flex; flex-direction: column; gap: 4px; margin-top: 8px; }
+    .new-chat-btn:hover { background: #2f6ec4; }
+
+    /* ── Preset topics ── */
+    .preset-list { display: flex; flex-direction: column; gap: 2px; }
     .preset-item {
-      padding: 8px 10px;
+      padding: 7px 10px;
       border-radius: 6px;
-      font-size: 13px;
+      font-size: 12.5px;
       cursor: pointer;
       color: #a8c4e0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .preset-item:hover { background: rgba(255,255,255,0.07); }
 
-    /* ── Chat area ── */
-    .chat-area {
-      flex: 1;
+    /* ── Recent history panel ── */
+    .history-panel {
       display: flex;
       flex-direction: column;
+      flex: 1;
       overflow: hidden;
+      padding: 0 12px 12px;
     }
+    .history-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 4px 6px;
+      border-bottom: 1px solid #243347;
+      margin-bottom: 6px;
+    }
+    .history-header span {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6b8099;
+    }
+    .clear-history-btn {
+      font-size: 11px;
+      color: #4a6070;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+    .clear-history-btn:hover { color: #e57373; background: rgba(229,115,115,0.1); }
+
+    .history-list {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .history-list::-webkit-scrollbar { width: 4px; }
+    .history-list::-webkit-scrollbar-thumb { background: #2d4055; border-radius: 4px; }
+
+    .history-item {
+      padding: 8px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      position: relative;
+    }
+    .history-item:hover { background: rgba(255,255,255,0.07); }
+    .history-item.active { background: rgba(59,130,212,0.18); }
+    .history-item .h-title {
+      font-size: 13px;
+      color: #cdd9e5;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-right: 20px;
+    }
+    .history-item .h-meta {
+      font-size: 11px;
+      color: #4a6070;
+    }
+    .history-item .h-delete {
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #4a6070;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 2px 4px;
+      border-radius: 3px;
+      display: none;
+      line-height: 1;
+    }
+    .history-item:hover .h-delete { display: block; }
+    .history-item .h-delete:hover { color: #e57373; }
+
+    .history-empty {
+      font-size: 12px;
+      color: #3d5166;
+      text-align: center;
+      padding: 20px 8px;
+      line-height: 1.6;
+    }
+
+    /* ── Chat area ── */
+    .chat-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
     #messages {
       flex: 1;
@@ -108,18 +193,12 @@
       gap: 18px;
     }
 
-    .msg {
-      display: flex;
-      gap: 12px;
-      max-width: 760px;
-      width: 100%;
-    }
+    .msg { display: flex; gap: 12px; max-width: 760px; width: 100%; }
     .msg.user { align-self: flex-end; flex-direction: row-reverse; }
     .msg.assistant { align-self: flex-start; }
 
     .avatar {
-      width: 32px;
-      height: 32px;
+      width: 32px; height: 32px;
       border-radius: 50%;
       flex-shrink: 0;
       display: flex;
@@ -140,16 +219,8 @@
       word-break: break-word;
       max-width: calc(100% - 48px);
     }
-    .msg.user .bubble {
-      background: #3b82d4;
-      color: #fff;
-      border-bottom-right-radius: 4px;
-    }
-    .msg.assistant .bubble {
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-bottom-left-radius: 4px;
-    }
+    .msg.user .bubble { background: #3b82d4; color: #fff; border-bottom-right-radius: 4px; }
+    .msg.assistant .bubble { background: #fff; border: 1px solid #e5e7eb; border-bottom-left-radius: 4px; }
 
     .typing-indicator span {
       display: inline-block;
@@ -217,6 +288,26 @@
     }
     .welcome h2 { font-size: 22px; color: #1f2328; }
     .welcome p { font-size: 14px; max-width: 420px; line-height: 1.6; }
+
+    /* ── Chat title bar ── */
+    .chat-titlebar {
+      padding: 10px 32px;
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 13px;
+      color: #57606a;
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .chat-titlebar .session-name {
+      font-weight: 600;
+      color: #1f2328;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   </style>
 </head>
 <body>
@@ -232,18 +323,35 @@
 
   <div class="app">
     <aside class="sidebar">
-      <div class="section-title">Sessions</div>
-      <button class="new-chat-btn" id="newChatBtn">+ New Research Chat</button>
-      <div class="preset-list">
-        <div class="preset-item" data-prompt="Summarize recent advances in quantum computing.">⚛ Quantum Computing</div>
-        <div class="preset-item" data-prompt="What are the key findings in large language model research in 2024?">🤖 LLM Research 2024</div>
-        <div class="preset-item" data-prompt="Explain the current state of climate change research and key mitigation strategies.">🌍 Climate Research</div>
-        <div class="preset-item" data-prompt="What is the latest research on CRISPR gene editing and its medical applications?">🧬 CRISPR & Genomics</div>
-        <div class="preset-item" data-prompt="Give me a deep-dive into current AI safety research and alignment approaches.">🛡 AI Safety</div>
+      <div class="sidebar-top">
+        <button class="new-chat-btn" id="newChatBtn">+ New Research Chat</button>
+
+        <div class="section-title" style="margin-top:4px;">Quick Topics</div>
+        <div class="preset-list">
+          <div class="preset-item" data-prompt="Summarize recent advances in quantum computing.">⚛ Quantum Computing</div>
+          <div class="preset-item" data-prompt="What are the key findings in large language model research in 2024?">🤖 LLM Research 2024</div>
+          <div class="preset-item" data-prompt="Explain the current state of climate change research and key mitigation strategies.">🌍 Climate Research</div>
+          <div class="preset-item" data-prompt="What is the latest research on CRISPR gene editing and its medical applications?">🧬 CRISPR & Genomics</div>
+          <div class="preset-item" data-prompt="Give me a deep-dive into current AI safety research and alignment approaches.">🛡 AI Safety</div>
+        </div>
+      </div>
+
+      <!-- Recent chat history -->
+      <div class="history-panel">
+        <div class="history-header">
+          <span>Recent Chats</span>
+          <button class="clear-history-btn" id="clearHistoryBtn" title="Clear all history">Clear all</button>
+        </div>
+        <div class="history-list" id="historyList">
+          <div class="history-empty">No past chats yet.<br>Start a conversation to see history here.</div>
+        </div>
       </div>
     </aside>
 
     <div class="chat-area">
+      <div class="chat-titlebar" id="chatTitlebar">
+        <span class="session-name" id="sessionNameEl">New Chat</span>
+      </div>
       <div id="messages">
         <div class="welcome" id="welcome">
           <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
@@ -256,7 +364,7 @@
             <line x1="40" y1="28" x2="46" y2="28" stroke="#3b82d4" stroke-width="2"/>
           </svg>
           <h2>IBM Granite Research Agent</h2>
-          <p>Ask any research question and get detailed, well-reasoned answers powered by IBM Granite-4. Use the presets in the sidebar to get started quickly.</p>
+          <p>Ask any research question and get detailed, well-reasoned answers powered by IBM Granite-4. Use the quick topics or type your own question below.</p>
         </div>
       </div>
       <div class="input-bar">
@@ -267,137 +375,138 @@
   </div>
 
   <script>
-    const messagesEl = document.getElementById('messages');
-    const input = document.getElementById('userInput');
-    const sendBtn = document.getElementById('sendBtn');
-    const welcomeEl = document.getElementById('welcome');
+    const messagesEl   = document.getElementById('messages');
+    const input        = document.getElementById('userInput');
+    const sendBtn      = document.getElementById('sendBtn');
+    const historyList  = document.getElementById('historyList');
+    const sessionNameEl = document.getElementById('sessionNameEl');
 
-    // Conversation history sent to the API
-    let history = [];
-
-    const SYSTEM_PROMPT = `You are a rigorous research assistant powered by IBM Granite-4. 
-Your role is to provide comprehensive, accurate, and well-structured research-quality answers. 
-Always cite reasoning clearly. When appropriate, break your answer into sections. 
+    const SYSTEM_PROMPT = `You are a rigorous research assistant powered by IBM Granite-4.
+Your role is to provide comprehensive, accurate, and well-structured research-quality answers.
+Always cite reasoning clearly. When appropriate, break your answer into sections.
 Remain objective and acknowledge uncertainty where it exists.`;
 
-    function hideWelcome() {
-      if (welcomeEl) welcomeEl.remove();
+    const STORAGE_KEY = 'rAgent_sessions';
+
+    // ── Active session state ──────────────────────────────────────────────────
+    let activeSessionId = null;   // null = unsaved new chat
+    let history = [];             // current conversation messages [{role,content}]
+
+    // ── localStorage helpers ─────────────────────────────────────────────────
+    function loadSessions() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+      catch { return []; }
+    }
+    function saveSessions(sessions) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(sessions));
     }
 
-    function appendMessage(role, text) {
-      hideWelcome();
-      const msg = document.createElement('div');
-      msg.className = `msg ${role}`;
+    /** Upsert the active session into storage with latest history. */
+    function persistActiveSession() {
+      if (history.length === 0) return;           // nothing to save
+      const sessions = loadSessions();
+      const title = history.find(m => m.role === 'user')?.content?.slice(0, 60) || 'Untitled';
+      const now = Date.now();
 
-      const avatar = document.createElement('div');
-      avatar.className = 'avatar';
-      avatar.textContent = role === 'user' ? 'U' : 'AI';
-
-      const bubble = document.createElement('div');
-      bubble.className = 'bubble';
-      bubble.textContent = text;
-
-      msg.appendChild(avatar);
-      msg.appendChild(bubble);
-      messagesEl.appendChild(msg);
-      messagesEl.scrollTop = messagesEl.scrollHeight;
-      return bubble;
+      if (activeSessionId) {
+        const idx = sessions.findIndex(s => s.id === activeSessionId);
+        if (idx !== -1) {
+          sessions[idx].history = history;
+          sessions[idx].title   = title;
+          sessions[idx].updatedAt = now;
+        } else {
+          sessions.unshift({ id: activeSessionId, title, history, createdAt: now, updatedAt: now });
+        }
+      } else {
+        activeSessionId = `s_${now}`;
+        sessions.unshift({ id: activeSessionId, title, history, createdAt: now, updatedAt: now });
+      }
+      saveSessions(sessions);
+      renderHistoryList();
     }
 
-    function showTyping() {
-      hideWelcome();
-      const msg = document.createElement('div');
-      msg.className = 'msg assistant';
-      msg.id = 'typing';
+    // ── Render sidebar history list ───────────────────────────────────────────
+    function renderHistoryList() {
+      const sessions = loadSessions();
+      historyList.innerHTML = '';
 
-      const avatar = document.createElement('div');
-      avatar.className = 'avatar';
-      avatar.textContent = 'AI';
+      if (sessions.length === 0) {
+        historyList.innerHTML = '<div class="history-empty">No past chats yet.<br>Start a conversation to see history here.</div>';
+        return;
+      }
 
-      const bubble = document.createElement('div');
-      bubble.className = 'bubble typing-indicator';
-      bubble.innerHTML = '<span></span><span></span><span></span>';
+      sessions.forEach(sess => {
+        const item = document.createElement('div');
+        item.className = 'history-item' + (sess.id === activeSessionId ? ' active' : '');
+        item.dataset.id = sess.id;
 
-      msg.appendChild(avatar);
-      msg.appendChild(bubble);
-      messagesEl.appendChild(msg);
-      messagesEl.scrollTop = messagesEl.scrollHeight;
-    }
+        const d = new Date(sess.updatedAt);
+        const dateStr = d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
+                      + ' ' + d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
 
-    function removeTyping() {
-      document.getElementById('typing')?.remove();
-    }
+        item.innerHTML = `
+          <div class="h-title">${escHtml(sess.title)}</div>
+          <div class="h-meta">${escHtml(dateStr)} · ${sess.history.filter(m=>m.role==='user').length} msg${sess.history.filter(m=>m.role==='user').length===1?'':'s'}</div>
+          <button class="h-delete" data-id="${sess.id}" title="Delete">✕</button>`;
 
-    async function sendMessage(userText) {
-      if (!userText.trim()) return;
-      sendBtn.disabled = true;
-      input.value = '';
-      input.style.height = 'auto';
-
-      appendMessage('user', userText);
-      history.push({ role: 'user', content: userText });
-      showTyping();
-
-      try {
-        const messages = [
-          { role: 'system', content: SYSTEM_PROMPT },
-          ...history
-        ];
-
-        const res = await fetch('/api/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ messages })
+        // click on item → restore session
+        item.addEventListener('click', (e) => {
+          if (e.target.classList.contains('h-delete')) return;
+          restoreSession(sess.id);
         });
 
-        const data = await res.json();
-        removeTyping();
+        // delete button
+        item.querySelector('.h-delete').addEventListener('click', (e) => {
+          e.stopPropagation();
+          deleteSession(sess.id);
+        });
 
-        if (!res.ok) {
-          appendMessage('assistant', `Error: ${data.error}`);
-        } else {
-          appendMessage('assistant', data.reply);
-          history.push({ role: 'assistant', content: data.reply });
-        }
-      } catch (err) {
-        removeTyping();
-        appendMessage('assistant', `Network error: ${err.message}`);
-      } finally {
-        sendBtn.disabled = false;
-        input.focus();
-      }
+        historyList.appendChild(item);
+      });
     }
 
-    // Send on button click
-    sendBtn.addEventListener('click', () => sendMessage(input.value));
+    function escHtml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
 
-    // Send on Enter (Shift+Enter for newline)
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage(input.value);
-      }
-    });
+    // ── Restore a past session ────────────────────────────────────────────────
+    function restoreSession(id) {
+      const sessions = loadSessions();
+      const sess = sessions.find(s => s.id === id);
+      if (!sess) return;
 
-    // Auto-resize textarea
-    input.addEventListener('input', () => {
-      input.style.height = 'auto';
-      input.style.height = Math.min(input.scrollHeight, 160) + 'px';
-    });
+      activeSessionId = id;
+      history = sess.history;
 
-    // Sidebar preset prompts
-    document.querySelectorAll('.preset-item').forEach(item => {
-      item.addEventListener('click', () => {
-        input.value = item.dataset.prompt;
-        input.dispatchEvent(new Event('input'));
-        sendMessage(item.dataset.prompt);
-      });
-    });
-
-    // New chat button
-    document.getElementById('newChatBtn').addEventListener('click', () => {
-      history = [];
+      // Rebuild the message DOM
       messagesEl.innerHTML = '';
+      sess.history.forEach(m => {
+        if (m.role !== 'system') appendMessage(m.role, m.content, false);
+      });
+
+      sessionNameEl.textContent = sess.title;
+      renderHistoryList();
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    // ── Delete a session ──────────────────────────────────────────────────────
+    function deleteSession(id) {
+      let sessions = loadSessions();
+      sessions = sessions.filter(s => s.id !== id);
+      saveSessions(sessions);
+
+      // If we deleted the active session, start fresh
+      if (id === activeSessionId) startNewChat();
+      else renderHistoryList();
+    }
+
+    // ── Start a fresh chat ────────────────────────────────────────────────────
+    function startNewChat() {
+      activeSessionId = null;
+      history = [];
+      sessionNameEl.textContent = 'New Chat';
+      messagesEl.innerHTML = '';
+
       const welcome = document.createElement('div');
       welcome.className = 'welcome';
       welcome.id = 'welcome';
@@ -412,10 +521,128 @@ Remain objective and acknowledge uncertainty where it exists.`;
           <line x1="40" y1="28" x2="46" y2="28" stroke="#3b82d4" stroke-width="2"/>
         </svg>
         <h2>IBM Granite Research Agent</h2>
-        <p>Ask any research question and get detailed, well-reasoned answers powered by IBM Granite-4. Use the presets in the sidebar to get started quickly.</p>`;
+        <p>Ask any research question and get detailed, well-reasoned answers powered by IBM Granite-4. Use the quick topics or type your own question below.</p>`;
       messagesEl.appendChild(welcome);
+      renderHistoryList();
       input.focus();
+    }
+
+    // ── Append a message bubble ───────────────────────────────────────────────
+    function appendMessage(role, text, scroll = true) {
+      document.getElementById('welcome')?.remove();
+
+      const msg = document.createElement('div');
+      msg.className = `msg ${role}`;
+
+      const avatar = document.createElement('div');
+      avatar.className = 'avatar';
+      avatar.textContent = role === 'user' ? 'U' : 'AI';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      bubble.textContent = text;
+
+      msg.appendChild(avatar);
+      msg.appendChild(bubble);
+      messagesEl.appendChild(msg);
+      if (scroll) messagesEl.scrollTop = messagesEl.scrollHeight;
+      return bubble;
+    }
+
+    function showTyping() {
+      document.getElementById('welcome')?.remove();
+      const msg = document.createElement('div');
+      msg.className = 'msg assistant';
+      msg.id = 'typing';
+      const avatar = document.createElement('div');
+      avatar.className = 'avatar';
+      avatar.textContent = 'AI';
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble typing-indicator';
+      bubble.innerHTML = '<span></span><span></span><span></span>';
+      msg.appendChild(avatar);
+      msg.appendChild(bubble);
+      messagesEl.appendChild(msg);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function removeTyping() { document.getElementById('typing')?.remove(); }
+
+    // ── Send a message ────────────────────────────────────────────────────────
+    async function sendMessage(userText) {
+      if (!userText.trim()) return;
+      sendBtn.disabled = true;
+      input.value = '';
+      input.style.height = 'auto';
+
+      appendMessage('user', userText);
+      history.push({ role: 'user', content: userText });
+
+      // Update title bar with first user message
+      if (history.filter(m => m.role === 'user').length === 1) {
+        sessionNameEl.textContent = userText.slice(0, 60);
+      }
+
+      showTyping();
+
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...history]
+          })
+        });
+
+        const data = await res.json();
+        removeTyping();
+
+        if (!res.ok) {
+          appendMessage('assistant', `Error: ${data.error}`);
+        } else {
+          appendMessage('assistant', data.reply);
+          history.push({ role: 'assistant', content: data.reply });
+          persistActiveSession();   // save to localStorage after each exchange
+        }
+      } catch (err) {
+        removeTyping();
+        appendMessage('assistant', `Network error: ${err.message}`);
+      } finally {
+        sendBtn.disabled = false;
+        input.focus();
+      }
+    }
+
+    // ── Event listeners ───────────────────────────────────────────────────────
+    sendBtn.addEventListener('click', () => sendMessage(input.value));
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(input.value); }
     });
+
+    input.addEventListener('input', () => {
+      input.style.height = 'auto';
+      input.style.height = Math.min(input.scrollHeight, 160) + 'px';
+    });
+
+    document.getElementById('newChatBtn').addEventListener('click', startNewChat);
+
+    document.querySelectorAll('.preset-item').forEach(item => {
+      item.addEventListener('click', () => {
+        startNewChat();
+        // Small delay so welcome screen clears first
+        setTimeout(() => sendMessage(item.dataset.prompt), 50);
+      });
+    });
+
+    document.getElementById('clearHistoryBtn').addEventListener('click', () => {
+      if (!confirm('Delete all chat history?')) return;
+      saveSessions([]);
+      startNewChat();
+    });
+
+    // ── Init ──────────────────────────────────────────────────────────────────
+    renderHistoryList();
   </script>
 </body>
 </html>
