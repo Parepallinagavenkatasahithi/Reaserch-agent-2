@@ -8,3 +8,5 @@ node_modules/
 
 # Vercel local metadata
 .vercel
+
+.vercel
